@@ -12,7 +12,7 @@ for _ in range(testcases):
         mid = (start + end) // 2
         if arr[mid] == ele:
            print(1)
-           break;
+           break
         elif arr[mid] > ele:
            end = mid - 1
         else:
