@@ -13,15 +13,16 @@ def findPivot(arr, low, high):
   return findPivot(arr, mid + 1, high) 
 
 def binarySearch(arr, low, high, key): 
-  if high < low: 
-    print("Not found")	 
   mid = int((low + high)/2) 
-  if key == arr[mid]: 
+  if high < low: 
+    return
+  elif key == arr[mid]: 
     print("found at", mid)
     return
   if key > arr[mid]: 
     return binarySearch(arr, (mid + 1), high, key) 
-  return binarySearch(arr, low, (mid -1), key); 
+  else:
+      return binarySearch(arr, low, (mid -1), key); 
 
 arr = list(map(int, input().split()))
 pivot = findPivot(arr, 0, len(arr) - 1)
