@@ -8,18 +8,13 @@ for i in range(vertices):
 
 queue = []
 queue.append(0) 
+visited[0] = True
 while len(queue) > 0: 
     node = queue.pop(0)
     print(node, end=' ')
     for i in range(vertices):
         if adj_matrix[node][i] == 1 and not visited[i]:
+            visited[i] = True
             queue.append(i)
-    visited[node] = True
 
 print()
-'''
-   0 1 1 0
-   0 0 0 1
-   0 1 0 0
-   0 0 0 0 
-'''
