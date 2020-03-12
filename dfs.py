@@ -36,7 +36,7 @@ def checkCycle(node, visited, stack):
     stack.append(node)
     hasCycle = False
 
-    for n in neighbours[node]:
+    for n in graph[node]:
         if visited[n]:
             if n in stack:
                 return True 
