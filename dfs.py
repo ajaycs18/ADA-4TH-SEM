@@ -11,15 +11,13 @@ for i in range(edges):
 
 stack = []
 visited = set()
-cycle = False
 start_vertex = int(input("enter start vertex: "))
 stack.append(start_vertex)
+
 while len(stack) > 0:
     node = stack.pop(0)
     if node not in visited:
         print(node, sep=' ')
-    else:
-        cycle = True
     visited.add(node) 
     if graph.get(node):
         for n in graph.get(node):
@@ -30,7 +28,27 @@ if len(visited) == n_vertices:
 else:
     print("Not Connected!")
 
-if cycle:
-    print("Cycle is present")
+    
+stack = []
+visited = [False] * len(graph.keys())
+def checkCycle(node, visited, stack):
+    visited[node] = True
+    stack.append(node)
+    hasCycle = False
+
+    for n in neighbours[node]:
+        if visited[n]:
+            if n in stack:
+                return True 
+            else:
+                return False
+        else:
+            hasCycle = checkCycle(n, visited, stack)
+
+    stack.pop()
+    return hasCycle
+
+if hasCycle:
+    print('cycle present')
 else:
-    print("Cycle is not present")
+    print('cycle absent')
