@@ -1,6 +1,6 @@
 def genFib(n):
     first, second, third = 0, 1, 1
-    while third <= n:
+    while third <= n + 1:
         yield third
         first, second = second, third
         third = first + second
