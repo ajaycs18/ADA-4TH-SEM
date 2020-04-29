@@ -7,7 +7,7 @@ def knapSack(val, weights, bag_weight):
     for i in range(len(weights) + 1):
         for j in range(bag_weight + 1):
             if i == 0 or j == 0:
-                dp[i][j] == 0
+                dp[i][j] = 0
             elif weights[i - 1] <= j:
                 dp[i][j] = max(val[i - 1] + dp[i - 1][j - weights[i - 1]], dp[i - 1][j])
             else:
