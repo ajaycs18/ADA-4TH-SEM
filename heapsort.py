@@ -1,48 +1,29 @@
-# Max Heap -> Descending Order
-
-def heapifyUp(heap):
-    if len(heap) == 1:
-        return
-    i = len(heap) - 1
-    while i > 0:
-        if heap[(i-1) // 2] < heap[i]:
-            heap[(i-1) // 2], heap[i] = heap[i], heap[(i-1) // 2] 
-        i -= 1
-    print(heap)
-
-def heapifyDown(heap):
-    if len(heap) == 1:
-        return
-    i = 0
-    while i < (len(heap) - 1) // 2:
-        if heap[2*i + 1] > heap[i]:
-            if heap[2*i + 2] > heap[2*i + 1]:
-                heap[i], heap[2*i + 2] = heap[2*i + 2], heap[i]
-                i = 2*i + 2
-            else:
-                heap[i], heap[2*i + 1] = heap[2*i + 1], heap[i]
-                i = 2*i + 1
+def heapify(heap, i, n):
+    max, left, right = i, 2*i + 1, 2*i + 2
+    if left < n and heap[left] > heap[max]:
+        max = left
+    if right < n and heap[right] > heap[max]:
+        max = right
+    if max != i:
+        heap[max], heap[i] = heap[i], heap[max]
+        heapify(heap, max, n)
 
 def buildHeap(arr):
-    heap = []
-    for ele in arr:
-        heap.append(ele)
-        heapifyUp(heap)
+    n = len(arr)
+    for i in range(len(arr)//2 - 1, -1, -1):
+        heapify(arr, i, n)
+    return arr
+
+def heapSort(heap):
+    max, n = 0, len(heap) - 1
+    while n > 0:
+        heap[max], heap[n] = heap[n], heap[max]
+        heapify(heap, 0, n)
+        n -= 1
     return heap
 
-def removeMax(heap):
-    if len(heap) == 1:
-        return heap.pop()
-    max = heap[0]
-    last = heap.pop()
-    heap[0] = last
-    heapifyDown(heap)
-    return max
-
 arr = list(map(int, input('enter array: ').split()))
-maxHeap = buildHeap(arr)
-print('maxHeap', maxHeap)
-sortedArr = []
-while maxHeap:
-    sortedArr.append(removeMax(maxHeap))
+heap = buildHeap(arr)
+print('maxHeap', heap)
+sortedArr = heapSort(heap) 
 print('sortedArr', sortedArr)
